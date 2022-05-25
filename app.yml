@@ -1,0 +1,36 @@
+---
+- hosts: localhost
+  become: yes
+  gather_facts: no
+  vars:
+          git_repo_url: https://github.com/decrypt1234/office_project.git
+          repo_path:
+          repo_branch:
+
+
+  tasks:
+          - name: Run the equivalent of "apt-get update" as a separate step
+
+            notify: 
+            apt:
+                    update_cache: no
+
+           - name: Ansible shell module multiple commands
+             shell: 'curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -'
+
+
+           - name: Install reqired packages
+             apt: name={{ item }} state=present
+             with_items:
+                     - git
+                     - curl
+                     - wget
+                     - nginx
+                     - nodejs
+
+
+                   
+  handlers:
+          - name:
+
+        
